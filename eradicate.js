@@ -164,31 +164,6 @@ var extensionURL = function(relativeURL){
     }
 }
 
-fbLink = $("<a href='javascript:;'>News Feed Eradicator :)</a>")
-    .addClass('nfe-info-link')
-    .on('click', function(){
-      var handleClose = function() {
-        $('.nfe-close-button').on('click', hideInfoPanel);
-      };
-      var url = 'info-panel.html';
-
-      if (window.chrome !== undefined) {
-        // Chrome extension
-        infoPanel.load(chrome.extension.getURL(url),
-                       handleClose);
-      } else {
-        // Firefox extension
-        self.port.emit('requestUrl', url);
-        self.port.once(url, function(data) {
-          console.log("Received data for ", url);
-          infoPanel.html(data);
-          handleClose();
-        });
-      }
-      infoPanel.show();
-    })
-	.appendTo(quoteDiv);
-
 // This delay ensures that the elements have been created by Facebook's
 // scripts before we attempt to replace them
 setInterval(function(){
